@@ -13,15 +13,19 @@ export const templateLanding = (container: HTMLElement) => {
   const canvas = container.querySelector("#three-container") as HTMLElement;
   const scene = new THREE.Scene();
 
+  let mixer: THREE.AnimationMixer;
+  const timer = new THREE.Timer();
+  timer.connect(document);
+
   const loader = new GLTFLoader();
   loader.load(
-    "../../public/models/wiz.gltf",
+    "/models/wiz.gltf",
     (gltf) => {
       console.log(gltf);
       scene.add(gltf.scene);
-    },
-    (xhr) => {
-      console.log((xhr.loaded / xhr.total) * 100 + "%");
+
+      mixer = new THREE.AnimationMixer(gltf.scene);
+      mixer.clipAction(gltf.animations[0]).play();
     },
     (err) => {
       console.error(err);
@@ -52,6 +56,10 @@ export const templateLanding = (container: HTMLElement) => {
 
   const animate = () => {
     requestAnimationFrame(animate);
+    timer.update();
+    if (mixer) {
+      mixer.update(timer.getDelta());
+    }
     renderer.render(scene, camera);
   };
 
