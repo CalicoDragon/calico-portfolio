@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export const templateLanding = (container: HTMLElement) => {
   container.innerHTML = `
@@ -33,12 +32,13 @@ export const templateLanding = (container: HTMLElement) => {
   );
 
   const camera = new THREE.PerspectiveCamera(
-    75,
+    60,
     window.innerWidth / window.innerHeight,
     0.1,
     100,
   );
-  camera.position.set(0, 1, 2);
+  camera.position.set(-9, 8, 14);
+  camera.rotation.set(-0.18, -0.63, -0.1);
   scene.add(camera);
 
   const renderer = new THREE.WebGLRenderer({ canvas: canvas });
@@ -48,12 +48,6 @@ export const templateLanding = (container: HTMLElement) => {
 
   scene.add(new THREE.AmbientLight(0xffffff, 1));
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.minDistance = 1;
-  controls.maxDistance = 50;
-  controls.target.set(0, 0.35, 0);
-  controls.update();
-
   const animate = () => {
     requestAnimationFrame(animate);
     timer.update();
@@ -61,6 +55,12 @@ export const templateLanding = (container: HTMLElement) => {
       mixer.update(timer.getDelta());
     }
     renderer.render(scene, camera);
+    console.log(
+      `pos: ${camera.position.x}, ${camera.position.y},${camera.position.z}`,
+    );
+    console.log(
+      `dir: ${camera.rotation.x}, ${camera.rotation.y},${camera.rotation.z}`,
+    );
   };
 
   animate();
