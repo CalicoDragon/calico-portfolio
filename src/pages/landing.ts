@@ -6,7 +6,7 @@ export const templateLanding = (container: HTMLElement) => {
   container.innerHTML = `
     <div>
       <h1>Landing works!</h1>
-      <canvas id="three-container" style="width: 100%; height: 100%;"></canvas>
+      <canvas id="three-container"></canvas>
     </div>
   `;
 
