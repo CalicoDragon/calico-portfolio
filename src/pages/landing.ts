@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { navigate } from "../utils/router.ts";
 
 export const templateLanding = (container: HTMLElement) => {
   container.innerHTML = `
@@ -20,11 +21,17 @@ export const templateLanding = (container: HTMLElement) => {
   loader.load(
     "/models/wiz.gltf",
     (gltf) => {
-      console.log(gltf);
       scene.add(gltf.scene);
 
+      // animation
       mixer = new THREE.AnimationMixer(gltf.scene);
       mixer.clipAction(gltf.animations[0]).play();
+
+      gltf.scene.traverse((object) => {
+        if (object.name === "Lantern")
+          object.userData = { route: "/portfolio" };
+        if (object.name === "aboutclick") object.userData = { route: "/about" };
+      });
     },
     (err) => {
       console.error(err);
@@ -32,21 +39,22 @@ export const templateLanding = (container: HTMLElement) => {
   );
 
   const camera = new THREE.PerspectiveCamera(
-    60,
+    65,
     window.innerWidth / window.innerHeight,
     0.1,
     100,
   );
-  camera.position.set(-9, 8, 14);
-  camera.rotation.set(-0.18, -0.63, -0.1);
+  camera.position.set(-13, 3, 25);
+  camera.rotation.set(0.15, -0.9, 0);
   scene.add(camera);
 
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio));
   renderer.shadowMap.enabled = true;
 
-  scene.add(new THREE.AmbientLight(0xffffff, 1));
+  scene.add(new THREE.AmbientLight(0xffffff, 3));
+  scene.background = new THREE.Color(0x0c0b0b);
 
   const animate = () => {
     requestAnimationFrame(animate);
@@ -55,13 +63,38 @@ export const templateLanding = (container: HTMLElement) => {
       mixer.update(timer.getDelta());
     }
     renderer.render(scene, camera);
-    console.log(
-      `pos: ${camera.position.x}, ${camera.position.y},${camera.position.z}`,
-    );
-    console.log(
-      `dir: ${camera.rotation.x}, ${camera.rotation.y},${camera.rotation.z}`,
-    );
   };
 
   animate();
+
+  // Buttons
+  const raycaster = new THREE.Raycaster();
+
+  // Click
+  document.addEventListener("mousedown", (event) => {
+    const intersections = getMouseIntersections(event);
+    if (intersections.length > 0) {
+      navigate(intersections[0].object.userData.route);
+    }
+  });
+
+  // Hover
+  document.addEventListener("mousemove", (event) => {
+    const intersections = getMouseIntersections(event);
+    if (intersections.length > 0 && intersections[0].object.userData.route) {
+      document.body.style.cursor = "pointer";
+    } else {
+      document.body.style.cursor = "default";
+    }
+  });
+
+  const getMouseIntersections = (event: MouseEvent) => {
+    const coords = new THREE.Vector2(
+      (event.clientX / renderer.domElement.clientWidth) * 2 - 1,
+      (event.clientY / renderer.domElement.clientHeight) * -2 + 1,
+    );
+    raycaster.setFromCamera(coords, camera);
+
+    return raycaster.intersectObjects(scene.children, true);
+  };
 };
