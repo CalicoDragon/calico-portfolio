@@ -1,9 +1,11 @@
 import { templateLanding } from "../pages/landing";
 import { templatePortfolio } from "../pages/portfolio";
+import { templateAbout } from "../pages/about";
 
 const routes: { path: string; template: any }[] = [
   { path: "/", template: templateLanding },
   { path: "/portfolio", template: templatePortfolio },
+  { path: "/about", template: templateAbout },
 ];
 
 let currentRoute: string | null = null;
@@ -31,7 +33,7 @@ export const initRouter = (): void => {
   });
 };
 
-const navigate = (path: string): void => {
+export const navigate = (path: string): void => {
   const route = routes.find((route) => route.path === path);
   const container = document.querySelector("#app");
 

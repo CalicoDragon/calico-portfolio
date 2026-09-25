@@ -3,5 +3,5 @@ export const templatePortfolio = (container: HTMLElement) => {
     <div>
       <h1>Portfolio works!</h1>
     </div>
-  `
-}
+  `;
+};

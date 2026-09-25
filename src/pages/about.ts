@@ -1,7 +1,7 @@
-export const templatePortfolio = (container: HTMLElement) => {
+export const templateAbout = (container: HTMLElement) => {
   container.innerHTML = `
     <div>
-      <h1>Portfolio works!</h1>
+      <h1>About works!</h1>
     </div>
-  `
-}
+  `;
+};
