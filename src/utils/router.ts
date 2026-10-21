@@ -1,11 +1,7 @@
-import { templateLanding } from "../pages/landing";
-import { templatePortfolio } from "../pages/portfolio";
-import { templateAbout } from "../pages/about";
+import { templateMain } from "../pages/main";
 
 const routes: { path: string; template: any }[] = [
-  { path: "/", template: templateLanding },
-  { path: "/portfolio", template: templatePortfolio },
-  { path: "/about", template: templateAbout },
+  { path: "/", template: templateMain },
 ];
 
 let currentRoute: string | null = null;
