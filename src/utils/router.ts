@@ -1,7 +1,7 @@
 import { templateMain } from "../pages/main";
 
 const routes: { path: string; template: any }[] = [
-  { path: "/", template: templateMain },
+  { path: "/calico-portfolio/", template: templateMain },
 ];
 
 let currentRoute: string | null = null;

@@ -17,7 +17,7 @@ export const templateMain = (container: HTMLElement) => {
 
   const loader = new GLTFLoader();
   loader.load(
-    "/models/scene.gltf",
+    "./models/scene.gltf",
     (gltf) => {
       backScene.add(gltf.scene);
 
@@ -32,7 +32,7 @@ export const templateMain = (container: HTMLElement) => {
   );
   
   loader.load(
-    "/models/wiz.gltf",
+    "./models/wiz.gltf",
     (gltf) => {
       frontScene.add(gltf.scene);
 
