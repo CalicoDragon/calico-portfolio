@@ -9,6 +9,10 @@
   font-family: "Nunito", sans-serif;
 }
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -23,17 +27,17 @@ svg {
   max-width: 100%;
 }
 
+section {
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
 h1,
 h3 {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
-}
-
-.hero,
-.about {
-  width: 100vw;
-  height: 100vh;
 }
 
 .hero {
