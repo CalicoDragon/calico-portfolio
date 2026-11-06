@@ -31,6 +31,7 @@ section {
   width: 100vw;
   height: 100vh;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 h1,
@@ -40,6 +41,7 @@ h3 {
   font-style: normal;
 }
 
+/* HERO */
 .hero {
 
   #back-canvas,
@@ -116,6 +118,7 @@ h3 {
   }
 }
 
+/* ABOUT */
 .about {
   display: flex;
   flex-direction: column;
@@ -137,6 +140,7 @@ h3 {
     height: 70%;
     padding: 0 10% 0 10%;
     gap: 1em;
+    justify-content: center;
 
     .left-container {
       display: flex;
@@ -149,15 +153,21 @@ h3 {
     }
 
     .right-container {
+      display: none;
       width: 60%;
       height: 100%;
       background: blue;
     }
 
     .separator {
+      display: none;
       height: 100%;
       width: 4px;
       background: #333333;
+    }
+
+    .visible {
+      display: inline;
     }
   }
 
@@ -178,11 +188,11 @@ h3 {
     gap: .75em;
   }
 
-  button {
+  .about-btn {
     height: 60px;
     width: 90%;
     background: #1A1A1A;
-    color: #fff;
+    color: #ccc;
     font-size: 1.5em;
     font-weight: 600;
     text-align: center;
@@ -192,11 +202,26 @@ h3 {
     transition: all 0.4s ease-in-out;
   }
 
-  button:hover {
+  .about-btn:hover {
+    width: 95%;
+    background: #333;
+    color: #fff;
+  }
+
+  .about-btn.selected {
     height: 65px;
     width: 100%;
     background: #E5E5E5;
     color: #000;
     text-transform: uppercase;
   }
+
+  .about-panel {
+    display: none;
+  }
+
+  .about-panel.visible {
+    display: inline;
+  }
+
 }

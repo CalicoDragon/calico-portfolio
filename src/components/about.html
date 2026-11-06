@@ -3,12 +3,17 @@
   <div class="left-container">
     <img src=./wizpfp.png>
     <div class="buttons">
-      <button>~/presentation.md</button>
-      <button>~/skills.ts</button>
-      <button>~/apps.ts</button>
-      <button>~/workspace.md</button>
+      <button class="about-btn" data-target="presentation">~/presentation.md</button>
+      <button class="about-btn" data-target="skills">~/skills.ts</button>
+      <button class="about-btn" data-target="apps">~/apps.ts</button>
+      <button class="about-btn" data-target="workspace">~/workspace.md</button>
     </div>
   </div>
   <div class="separator"></div>
-  <div class="right-container"></div>
+  <div class="right-container">
+    <div class="about-panel" id="presentation">Presentation</div>
+    <div class="about-panel" id="skills">Skills</div>
+    <div class="about-panel" id="apps">Apps</div>
+    <div class="about-panel" id="workspace">Workspace</div>
+  </div>
 </div>
